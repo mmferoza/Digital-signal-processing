@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Signal Processing Laboratory - Programs 1 to 14</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#eef2ff,#f8fafc,#ecfeff);color:#172033}
+header{background:linear-gradient(135deg,#312e81,#4f46e5,#0891b2);color:#fff;text-align:center;padding:35px 20px;box-shadow:0 5px 20px rgba(0,0,0,.2)}
+header h1{margin:0;font-size:38px} header p{margin-top:10px;font-size:18px}
+nav{position:sticky;top:0;z-index:1000;background:#111827;display:flex;justify-content:center;flex-wrap:wrap;padding:10px}
+nav a{color:#fff;text-decoration:none;padding:10px 14px;margin:4px;border-radius:20px;font-weight:bold;font-size:13px}
+nav a:hover{background:#4f46e5}
+.container{width:92%;max-width:1250px;margin:25px auto}
+.program-title{background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;padding:25px;border-radius:18px;margin-bottom:25px;box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.program-title h2{margin:0;font-size:28px}.program-title p{font-size:17px}
+.info-card{background:#fff;border-radius:16px;padding:25px;margin:20px 0;box-shadow:0 5px 18px rgba(0,0,0,.1);border-left:7px solid #4f46e5}
+.info-card h2{color:#3730a3;margin-top:0}.info-card li{margin:9px 0;line-height:1.6}
+.signal-card{background:#fff;margin:25px 0;border-radius:18px;padding:22px;box-shadow:0 7px 20px rgba(0,0,0,.12);border-top:6px solid #0891b2}
+.signal-card h2{color:#0f766e}.code-box{background:#111827;color:#e5e7eb;border-radius:12px;padding:18px;overflow-x:auto;margin-top:15px}
+pre{margin:0;white-space:pre-wrap;font-family:Consolas,monospace;font-size:14px;line-height:1.5}
+.button-area{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0}
+button{border:none;border-radius:10px;padding:12px 20px;color:#fff;font-weight:bold;cursor:pointer;font-size:15px;transition:.2s}
+button:hover{transform:translateY(-2px);box-shadow:0 5px 12px rgba(0,0,0,.2)}
+.copy-btn{background:#7c3aed}.run-btn{background:#059669}
+.input-area{background:#f0fdfa;border:2px solid #5eead4;padding:18px;border-radius:12px;margin:15px 0}
+.input-area label{display:block;font-weight:bold;margin:8px 0 5px}
+input{width:100%;max-width:650px;padding:11px;border:1px solid #94a3b8;border-radius:8px;font-size:15px;margin-bottom:8px}
+.output{margin-top:20px;padding:15px;background:#f8fafc;border-radius:12px;min-height:100px}
+.chart-container{position:relative;width:100%;height:400px;margin-top:15px;background:#fff;border-radius:12px;padding:10px}
+.result{background:#ecfdf5;border-left:6px solid #10b981;padding:15px;margin-top:15px;border-radius:8px;font-weight:bold}
+.result-box{margin-top:15px;padding:15px;background:#eef2ff;border-radius:10px;line-height:1.8}
+.divider{height:5px;background:linear-gradient(90deg,#4f46e5,#06b6d4,#10b981);border-radius:5px;margin:45px 0}
+footer{background:#111827;color:#fff;text-align:center;padding:25px;margin-top:50px}
+.small-note{color:#475569;font-size:14px;margin-top:8px}
+@media(max-width:700px){header h1{font-size:27px}.container{width:95%}nav a{font-size:11px;padding:8px 9px}}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Digital Signal Processing Laboratory</h1>
+<p>Interactive MATLAB Programs 1 to 15</p>
+<p class="small-note" style="color:#dbeafe">Execute & Plot buttons provide browser-based visualization of the MATLAB experiments.</p>
+</header>
+
+<nav>
+<a href="#p1">Program 1</a><a href="#p2">Program 2</a><a href="#p3">Program 3</a>
+<a href="#p4">Program 4</a><a href="#p5">Program 5</a><a href="#p6">Program 6</a>
+<a href="#p7">Program 7</a><a href="#p8">Program 8</a><a href="#p9">Program 9</a>
+<a href="#p10">Program 10</a><a href="#p11">Program 11</a><a href="#p12">Program 12</a>
+<a href="#p13">Program 13</a><a href="#p14">Program 14</a><a href="#p15">Program 15</a>
+</nav>
+
+<div class="container">
+
+<!-- PROGRAM 1 -->
+<section id="p1">
+<div class="program-title"><h2>PROGRAM 1 – Generation of Discrete-Time Signals</h2><p>Generation of Unit Sample, Unit Step, Exponential, Sinusoidal and Random Sequences</p></div>
+<div class="info-card"><h2>🎯 Aim</h2><p>To generate and visualize Unit Sample, Unit Step, Exponential, Sinusoidal and Random discrete-time sequences.</p></div>
+<div class="info-card"><h2>📖 Theory</h2>
+<p><b>Unit Sample:</b> δ[n] is 1 at n=0 and 0 elsewhere.</p>
+<p><b>Unit Step:</b> u[n] is 1 for n≥0 and 0 for n&lt;0.</p>
+<p><b>Exponential:</b> x[n]=a<sup>n</sup>.</p>
+<p><b>Sinusoidal:</b> x[n]=A sin(ωn+φ).</p>
+<p><b>Random Sequence:</b> a sequence whose values are generated randomly.</p></div>
+<div class="info-card"><h2>⚙️ Algorithm</h2><ol><li>Start.</li><li>Define the required time index.</li><li>Generate the required sequence.</li><li>Plot the sequence.</li><li>Add labels, title and grid.</li><li>Stop.</li></ol></div>
+
+<div class="signal-card"><h2>1.1 Unit Sample Sequence</h2>
+<div class="code-box"><pre id="code-unit-sample">clc ;
+clear all ;
+close all;
+
+n = -10:10;
+delta = (n == 0); 
+stem(n, delta);
+xlabel('n'); 
+ylabel('\delta[n]'); 
+title('Unit Sample Sequence');
+grid on;</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-unit-sample')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runUnitSample()">▶ Execute & Plot</button></div>
+<div class="chart-container"><canvas id="chartUnitSample"></canvas></div></div>
+
+<div class="signal-card"><h2>1.2 Unit Step Sequence</h2>
+<div class="input-area"><label>Enter n value:</label><input id="stepN" type="number" value="10" min="1"></div>
+<div class="code-box"><pre id="code-unit-step">clc; 
+clear all; 
+close all;
+n=input('Enter the n value:');
+t=0:1:n-1;
+y=ones(1,n);
+stem(t,y);
+xlabel('Time'); 
+ylabel('Amplitude');
+title('Discrete time unit step function');</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-unit-step')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runUnitStep()">▶ Execute & Plot</button></div>
+<div class="chart-container"><canvas id="chartUnitStep"></canvas></div></div>
+
+<div class="signal-card"><h2>1.3 Exponential Sequence</h2>
+<div class="input-area"><label>Starting n:</label><input id="expN1" type="number" value="-10"><label>Ending n:</label><input id="expN2" type="number" value="10"><label>Value of a:</label><input id="expA" type="number" value="0.8" step="0.1"></div>
+<div class="code-box"><pre id="code-exponential">clc;
+clear all;
+close all;
+
+% User input
+n1 = input('Enter the starting value of n: ');
+n2 = input('Enter the ending value of n: ');
+a = input('Enter the value of a: ');
+
+% Generate discrete-time index
+n = n1:n2;
+
+% Generate exponential sequence
+x = a .^ n;
+
+% Plot the sequence
+stem(n, x, 'filled');
+xlabel('n');
+ylabel('x[n]');
+title(['Exponential Sequence (a = ', num2str(a), ')']);
+grid on;</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-exponential')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runExponential()">▶ Execute & Plot</button></div>
+<div class="chart-container"><canvas id="chartExponential"></canvas></div></div>
+
+<div class="signal-card"><h2>1.4 Sinusoidal Sequence</h2>
+<div class="code-box"><pre id="code-sinusoidal">clc;
+clear all;
+close all;
+
+% Create time vector
+t = 0:0.001:5;
+
+% Frequency of sine wave
+f = 1;
+
+% Generate sine wave
+y = sin(2*pi*f*t);
+
+% Plot the sine wave
+plot(t, y, 'g', 'LineWidth', 1.5);
+
+xlabel('Time (s)');
+ylabel('Amplitude');
+title('Sine Wave');
+
+grid on;</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-sinusoidal')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runSinusoidal()">▶ Execute & Plot</button></div>
+<div class="chart-container"><canvas id="chartSinusoidal"></canvas></div></div>
+
+<div class="signal-card"><h2>1.5 Random Sequence</h2>
+<div class="code-box"><pre id="code-random">n = 0:40;
+x = rand(1, length(n));
+stem(n, x);
+xlabel('n'); 
+ylabel('x[n]'); 
+title('Random Sequence'); 
+grid on;</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-random')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runRandom()">▶ Execute & Plot</button></div>
+<div class="chart-container"><canvas id="chartRandom"></canvas></div></div>
+<div class="result">Result: The required discrete-time signals are generated and plotted.</div>
+</section><div class="divider"></div>
+
+<!-- PROGRAM 2 -->
+<section id="p2">
+<div class="program-title"><h2>PROGRAM 2 – Operations on Signals</h2><p>Signal Addition, Multiplication, Scaling, Shifting and Folding</p></div>
+<div class="info-card"><h2>🎯 Aim</h2><p>To perform basic operations on discrete-time signals including addition, multiplication, scaling, shifting and folding.</p></div>
+<div class="info-card"><h2>📖 Theory</h2><p><b>Addition:</b> y[n]=x₁[n]+x₂[n].</p><p><b>Multiplication:</b> y[n]=x₁[n]x₂[n].</p><p><b>Scaling:</b> y[n]=a x[n].</p><p><b>Shifting:</b> signal position is changed along the time axis.</p><p><b>Folding:</b> y[n]=x[-n].</p></div>
+<div class="info-card"><h2>⚙️ Algorithm</h2><ol><li>Define or enter the signals.</li><li>Perform the required operation.</li><li>Plot original and resultant signals.</li><li>Observe the output.</li></ol></div>
+
+<div class="signal-card"><h2>2.1 Signal Addition</h2><div class="input-area"><label>x1[n]:</label><input id="addX1" value="1 2 3 4 5"><label>x2[n]:</label><input id="addX2" value="5 4 3 2 1"></div>
+<div class="code-box"><pre id="code-addition">clc;
+clear all;
+close all;
+
+x1 = input('Enter the first signal x1[n] as a vector: ');
+x2 = input('Enter the second signal x2[n] as a vector: ');
+
+if length(x1) ~= length(x2)
+    disp('Error: Both signals must have the same length.');
+else
+    n = 0:length(x1)-1;
+    y = x1 + x2;
+    figure;
+    subplot(3,1,1);
+    stem(n,x1,'filled');
+    title('First Signal x_1[n]');
+    xlabel('n');
+    ylabel('Amplitude');
+    grid on;
+    subplot(3,1,2);
+    stem(n,x2,'filled');
+    title('Second Signal x_2[n]');
+    xlabel('n');
+    ylabel('Amplitude');
+    grid on;
+    subplot(3,1,3);
+    stem(n,y,'filled');
+    title('Addition of Two Signals');
+    xlabel('n');
+    ylabel('x_1[n] + x_2[n]');
+    grid on;
+    disp('Resultant Signal y[n] = ');
+    disp(y);
+end</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-addition')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runAddition()">▶ Execute & Plot</button></div><div class="chart-container"><canvas id="chartAddition"></canvas></div><div id="additionResult" class="result-box"></div></div>
+
+<div class="signal-card"><h2>2.2 Signal Multiplication</h2><div class="code-box"><pre id="code-multiplication">clc;
+clear all;
+close all;
+
+n = -10:10;
+x1 = sin(0.2*pi*n);
+x2 = cos(0.2*pi*n);
+y_mult = x1 .* x2;
+
+subplot(3,1,1);
+stem(n,x1,'filled');
+title('a) First Signal x_1[n]');
+xlabel('n');
+ylabel('x_1[n]');
+grid on;
+
+subplot(3,1,2);
+stem(n,x2,'filled');
+title('b) Second Signal x_2[n]');
+xlabel('n');
+ylabel('x_2[n]');
+grid on;
+
+subplot(3,1,3);
+stem(n,y_mult,'filled');
+title('c) Signal Multiplication');
+xlabel('n');
+ylabel('x_1[n] \times x_2[n]');
+grid on;</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-multiplication')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runMultiplication()">▶ Execute & Plot</button></div><div class="chart-container"><canvas id="chartMultiplication"></canvas></div></div>
+
+<div class="signal-card"><h2>2.3 Signal Scaling</h2><div class="code-box"><pre id="code-scaling">clc;
+clear all;
+close all;
+
+n = -10:10;
+a = 2;
+x1 = sin(0.2*pi*n);
+y_scale = a*x1;
+
+subplot(2,1,1);
+stem(n,x1,'filled');
+title('a) Original Signal x_1[n]');
+xlabel('n');
+ylabel('x_1[n]');
+grid on;
+
+subplot(2,1,2);
+stem(n,y_scale,'filled');
+title('b) Signal Scaling (a = 2)');
+xlabel('n');
+ylabel('2x_1[n]');
+grid on;</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-scaling')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runScaling()">▶ Execute & Plot</button></div><div class="chart-container"><canvas id="chartScaling"></canvas></div></div>
+
+<div class="signal-card"><h2>2.4 Left Shift</h2><div class="code-box"><pre id="code-left-shift">clc;
+clear all;
+close all;
+
+n = -10:10;
+x1 = sin(0.2*pi*n);
+shift = 3;
+nshifted = n - shift;
+
+subplot(2,1,1);
+stem(n,x1,'filled');
+title('a) Original Signal x_1[n]');
+xlabel('n');
+ylabel('x_1[n]');
+grid on;
+
+subplot(2,1,2);
+stem(nshifted,x1,'filled');
+title('b) Signal Shifting (Left Shift by 3 Samples)');
+xlabel('n');
+ylabel('x[n+3]');
+grid on;</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-left-shift')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runLeftShift()">▶ Execute & Plot</button></div><div class="chart-container"><canvas id="chartLeftShift"></canvas></div></div>
+
+<div class="signal-card"><h2>2.5 Right Shift</h2><div class="code-box"><pre id="code-right-shift">clc;
+clear;
+close all;
+
+n = -10:10;
+x = sin(0.2*pi*n);
+shift = 3;
+n_shift = n + shift;
+
+subplot(2,1,1);
+stem(n,x,'filled','LineWidth',1.5);
+title('a) Original Signal x[n]');
+xlabel('n');
+ylabel('Amplitude');
+grid on;
+
+subplot(2,1,2);
+stem(n_shift,x,'filled','LineWidth',1.5);
+title('b) Right Shifted Signal y[n] = x[n-3]');
+xlabel('n');
+ylabel('Amplitude');
+grid on;</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-right-shift')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runRightShift()">▶ Execute & Plot</button></div><div class="chart-container"><canvas id="chartRightShift"></canvas></div></div>
+
+<div class="signal-card"><h2>2.6 Folding of Cosine Signal</h2><div class="code-box"><pre id="code-fold-cosine">clc;
+clear;
+close all;
+
+n = -10:10;
+x = cos(0.2*pi*n);
+x_fold = flip(x);
+
+figure;
+subplot(2,1,1);
+stem(n,x,'filled');
+title('Original Signal x[n]');
+xlabel('n');
+ylabel('Amplitude');
+grid on;
+
+subplot(2,1,2);
+stem(n,x_fold,'filled');
+title('Folded Signal x[-n]');
+xlabel('n');
+ylabel('Amplitude');
+grid on;</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-fold-cosine')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runFoldCosine()">▶ Execute & Plot</button></div><div class="chart-container"><canvas id="chartFoldCosine"></canvas></div></div>
+
+<div class="signal-card"><h2>2.7 Folding of Ramp Signal</h2><div class="code-box"><pre id="code-fold-ramp">clc;
+clear;
+close all;
+
+n = -5:5;
+x = n;
+x_fold = fliplr(x);
+
+figure;
+subplot(2,1,1);
+stem(n,x,'filled','LineWidth',1.5);
+title('Original Signal x[n]');
+xlabel('n');
+ylabel('Amplitude');
+axis([-5 5 -6 6]);
+grid on;
+
+subplot(2,1,2);
+stem(n,x_fold,'filled','LineWidth',1.5);
+title('Folded Signal x[-n]');
+xlabel('n');
+ylabel('Amplitude');
+axis([-5 5 -6 6]);
+grid on;</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-fold-ramp')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runFoldRamp()">▶ Execute & Plot</button></div><div class="chart-container"><canvas id="chartFoldRamp"></canvas></div></div>
+
+<div class="signal-card"><h2>2.8 Folding of Given Sequence</h2><div class="code-box"><pre id="code-fold-given">clc;
+clear;
+close all;
+
+n = -5:5;
+x = [0 0 1 2 3 4 5 4 2 1 0];
+x_fold = fliplr(x);
+
+figure;
+subplot(2,1,1);
+stem(n,x,'filled','LineWidth',1.5);
+title('Original Signal x[n]');
+xlabel('n');
+ylabel('Amplitude');
+grid on;
+
+subplot(2,1,2);
+stem(n,x_fold,'filled','LineWidth',1.5);
+title('Folded Signal x[-n]');
+xlabel('n');
+ylabel('Amplitude');
+grid on;</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-fold-given')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runFoldGiven()">▶ Execute & Plot</button></div><div class="chart-container"><canvas id="chartFoldGiven"></canvas></div></div>
+<div class="result">Result: The required signal operations are performed successfully.</div>
+</section><div class="divider"></div>
+
+<!-- PROGRAM 3 -->
+<section id="p3">
+<div class="program-title"><h2>PROGRAM 3 – Linear Convolution</h2><p>Convolution of Two Given Sequences Without Using Built-in Function</p></div>
+<div class="info-card"><h2>🎯 Aim</h2><p>To compute the linear convolution of two sequences without using MATLAB's built-in <b>conv()</b> function.</p></div>
+<div class="info-card"><h2>📖 Theory</h2><p>For an LTI system, the output is obtained by convolution: <b>y[n]=x[n]*h[n]</b>. If the lengths are N₁ and N₂, the output length is N=N₁+N₂−1.</p></div>
+<div class="info-card"><h2>⚙️ Algorithm</h2><ol><li>Enter x[n] and h[n].</li><li>Find their lengths.</li><li>Initialize output to zero.</li><li>Use nested loops to perform convolution.</li><li>Plot the input sequences and output.</li><li>Display the result.</li></ol></div>
+<div class="signal-card"><h2>Linear Convolution</h2><div class="input-area"><label>x[n]:</label><input id="convX" value="1 2 3 1"><label>h[n]:</label><input id="convH" value="1 1 1"></div>
+<div class="code-box"><pre id="code-convolution">clc;
+clear all;
+close all;
+
+x = input('Enter x = ');
+h = input('Enter h = ');
+
+N1 = length(x);
+N2 = length(h);
+
+N = N1 + N2 - 1;
+
+y = zeros(1,N);
+
+for n = 1:N
+    for k = 1:N1
+        if (n-k+1 >= 1) && (n-k+1 <= N2)
+            y(n) = y(n) + x(k)*h(n-k+1);
+        end
+    end
+end
+
+n = 0:N-1;
+
+figure;
+
+subplot(3,1,1);
+stem(0:N1-1,x,'filled');
+xlabel('n');
+ylabel('x[n]');
+title('Input Signal x[n]');
+grid on;
+
+subplot(3,1,2);
+stem(0:N2-1,h,'filled');
+xlabel('n');
+ylabel('h[n]');
+title('Impulse Response h[n]');
+grid on;
+
+subplot(3,1,3);
+stem(n,y,'filled');
+xlabel('n');
+ylabel('y[n]');
+title('Output Signal y[n] = x[n] * h[n]');
+grid on;
+
+disp('Linear Convolution Result:');
+disp(y);</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-convolution')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runConvolution()">▶ Execute & Plot</button></div>
+<div class="chart-container"><canvas id="chartConvolution"></canvas></div><div id="convolutionResult" class="result-box"></div></div>
+</section><div class="divider"></div>
+
+<!-- PROGRAM 4 -->
+<section id="p4">
+<div class="program-title"><h2>PROGRAM 4 – Computation of N-Point DFT</h2><p>Computation and Visualization of Magnitude and Phase Spectrum</p></div>
+<div class="info-card"><h2>🎯 Aim</h2><p>To compute the N-point DFT of a given sequence and plot its magnitude and phase spectrum.</p></div>
+<div class="info-card"><h2>📖 Theory</h2><p>The DFT is given by <b>X[k]=Σ x[n]e<sup>−j2πkn/N</sup></b>. The magnitude is |X[k]| and phase is ∠X[k].</p></div>
+<div class="signal-card"><h2>N-Point DFT</h2><div class="input-area"><label>x[n]:</label><input id="dftX" value="1 2 3 4"></div>
+<div class="code-box"><pre id="code-dft">clc;
+clear all;
+close all;
+
+x=input('enter x = ');
+N1=length(x);
+X=fft(x);
+
+disp('x=');
+disp(X);
+
+disp('mag=');
+disp(abs(X));
+
+disp('phase=');
+disp(angle(X));
+
+subplot(2,1,1);
+k=1:N1;
+stem(k,abs(X));
+title('magnitude of X(k)','color','r');
+grid on;
+
+subplot(2,1,2);
+k=1:N1;
+stem(k,angle(X),'filled');
+grid on;
+title('phase of X(k)','color','r');</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-dft')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runDFT()">▶ Execute & Plot</button></div>
+<div class="chart-container"><canvas id="chartDFT"></canvas></div><div id="dftResult" class="result-box"></div></div>
+</section><div class="divider"></div>
+
+<!-- PROGRAM 5 -->
+<section id="p5">
+<div class="program-title"><h2>PROGRAM 5 – Properties of Convolution</h2><p>Verification of Commutative, Associative and Distributive Properties Using FFT</p></div>
+<div class="info-card"><h2>🎯 Aim</h2><p>To verify the commutative, associative and distributive properties of convolution using FFT.</p></div>
+<div class="info-card"><h2>📖 Theory</h2><p><b>Commutative:</b> x*h=h*x.</p><p><b>Associative:</b> (x*h₁)*h₂=x*(h₁*h₂).</p><p><b>Distributive:</b> x*(h₁+h₂)=x*h₁+x*h₂.</p><p>FFT converts convolution into multiplication in the frequency domain.</p></div>
+<div class="signal-card"><h2>Verification Using FFT</h2><div class="input-area"><label>x:</label><input id="p5x" value="1 2 3 4"><label>h1:</label><input id="p5h1" value="1 1 2 1"><label>h2:</label><input id="p5h2" value="2 1 1 2"><label>N:</label><input id="p5N" type="number" value="8" min="1"></div>
+<div class="code-box"><pre id="code-p5">clc; clear all; close all;
+
+% Input sequences
+x = input('Enter the first sequence: ');
+h1 = input('Enter the second sequence: ');
+h2 = input('Enter the third sequence: ');
+N = input('Enter the length: ');
+
+% Perform FFT on the sequences
+X = fft(x,N);
+H1 = fft(h1,N);
+H2 = fft(h2,N);
+
+% Commutative property
+Y1 = X .* H1;
+Y2 = H1 .* X;
+
+y1 = ifft(Y1);
+
+subplot(3,2,1);
+stem(real(y1));
+grid on;
+xlabel('Time');
+ylabel('Magnitude');
+title('y1: X .* H1');
+
+y2 = ifft(Y2);
+
+subplot(3,2,2);
+stem(real(y2));
+grid on;
+xlabel('Time');
+ylabel('Magnitude');
+title('y2: H1 .* X');
+
+disp('y1:');
+disp(y1);
+disp('y2:');
+disp(y2);
+
+if isequal(y1,y2)
+    disp('Commutative property is verified.');
+else
+    disp('Commutative property is not verified.');
+end
+
+% Associative property
+Y3 = (X .* H1) .* H2;
+y3 = ifft(Y3);
+
+subplot(3,2,3);
+stem(real(y3));
+grid on;
+xlabel('Time');
+ylabel('Magnitude');
+title('y3: (X .* H1) .* H2');
+
+Y4 = X .* (H1 .* H2);
+y4 = ifft(Y4);
+
+subplot(3,2,4);
+stem(real(y4));
+grid on;
+xlabel('Time');
+ylabel('Magnitude');
+title('y4: X .* (H1 .* H2)');
+
+disp('y3:');
+disp(y3);
+disp('y4:');
+disp(y4);
+
+if isequal(y3,y4)
+    disp('Associative property is verified.');
+else
+    disp('Associative property is not verified.');
+end
+
+% Distributive property
+Y5 = X .* (H1 + H2);
+Y6 = X .* H1 + X .* H2;
+
+y5 = ifft(Y5);
+subplot(3,2,5);
+stem(real(y5));
+grid on;
+xlabel('Time');
+ylabel('Magnitude');
+title('y5: X .* (H1 + H2)');
+
+y6 = ifft(Y6);
+subplot(3,2,6);
+stem(real(y6));
+grid on;
+xlabel('Time');
+ylabel('Magnitude');
+title('y6: X .* H1 + X .* H2');
+
+disp('y5:');
+disp(y5);
+disp('y6:');
+disp(y6);
+
+if isequal(y5,y6)
+    disp('Distributive property is verified.');
+else
+    disp('Distributive property is not verified.');
+end</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-p5')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runP5()">▶ Execute & Plot</button></div><div class="chart-container"><canvas id="chartP5"></canvas></div><div id="p5Result" class="result-box"></div></div>
+</section><div class="divider"></div>
+
+<!-- PROGRAM 6 -->
+<section id="p6">
+<div class="program-title"><h2>PROGRAM 6 – Linear Convolution Using FFT</h2><p>Linear Convolution Using FFT and IFFT</p></div>
+<div class="info-card"><h2>🎯 Aim</h2><p>To compute linear convolution of two sequences using FFT and IFFT.</p></div>
+<div class="info-card"><h2>📖 Theory</h2><p>For linear convolution, zero-pad both sequences to N=Nx+Ny−1. Then Z[k]=X[k]Y[k] and z[n]=IFFT{Z[k]}.</p></div>
+<div class="signal-card"><h2>Linear Convolution Using FFT</h2><div class="input-area"><label>x:</label><input id="fftConvX" value="1 2 3 4"><label>y:</label><input id="fftConvY" value="1 1 1"></div>
+<div class="code-box"><pre id="code-p6">clc; clear; close all;
+
+x=input('Enter x=');
+y=input('Enter y=');
+
+Nx=length(x);
+Ny=length(y);
+
+N=Nx+Ny-1;
+
+X=fft(x,N);
+Y=fft(y,N);
+
+z=X.*Y;
+
+Z=ifft(z,N);
+
+disp(Z);
+
+subplot(3,1,1);
+stem(x);
+grid on;
+title('Sequence x','color','r');
+
+subplot(3,1,2);
+stem(y);
+grid on;
+title('Sequence y','color','r');
+
+subplot(3,1,3);
+stem(Z);
+grid on;
+title('linear convolution','color','r');</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-p6')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runP6()">▶ Execute & Plot</button></div><div class="chart-container"><canvas id="chartP6"></canvas></div><div id="p6Result" class="result-box"></div></div>
+</section><div class="divider"></div>
+
+<!-- PROGRAM 7 -->
+<section id="p7">
+<div class="program-title"><h2>PROGRAM 7 – Circular Convolution Using DFT/FFT</h2><p>Computation of Circular Convolution of Two Given Sequences Using DFT/FFT</p></div>
+<div class="info-card"><h2>🎯 Aim</h2><p>To compute circular convolution of two sequences using DFT/FFT.</p></div>
+<div class="info-card"><h2>📖 Theory</h2><p>Circular convolution is given by z[n]=x[n]⊛y[n]. In the frequency domain, Z[k]=X[k]Y[k].</p></div>
+<div class="signal-card"><h2>Circular Convolution</h2><div class="input-area"><label>x:</label><input id="circX" value="1 2 3 4"><label>y:</label><input id="circY" value="1 1 1 1"></div>
+<div class="code-box"><pre id="code-circular">clc; 
+clear; 
+close all;
+
+x = input('Enter x=');
+y = input('Enter y=');
+
+Nx = length(x);
+Ny = length(y);
+
+N = max(Nx, Ny);
+
+X = fft(x,N);
+Y = fft(y,N);
+
+z = X .* Y;
+
+Z = ifft(z,N);
+
+disp('Circular Convolution Result:');
+disp(Z);
+
+subplot(3,1,1);
+stem(x);
+grid on;
+title('Sequence x','color','r');
+
+subplot(3,1,2);
+stem(y);
+grid on;
+title('Sequence y','color','r');
+
+subplot(3,1,3);
+stem(Z);
+grid on;
+title('circular convolution','color','r');</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-circular')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runCircularConvolution()">▶ Execute & Plot</button></div><div class="chart-container"><canvas id="chartCircular"></canvas></div><div id="circularResult" class="result-box"></div></div>
+</section><div class="divider"></div>
+
+<!-- PROGRAM 8 -->
+<section id="p8">
+<div class="program-title"><h2>PROGRAM 8 – Linearity Property of DFT</h2><p>Verification of Linearity Property of Discrete Fourier Transform</p></div>
+<div class="info-card"><h2>🎯 Aim</h2><p>To verify the linearity property of the DFT.</p></div>
+<div class="info-card"><h2>📖 Theory</h2><p>If y[n]=a x₁[n]+b x₂[n], then DFT{y[n]}=aX₁[k]+bX₂[k].</p></div>
+<div class="signal-card"><h2>DFT Linearity</h2><div class="input-area"><label>N:</label><input id="p8N" type="number" value="4"><label>x1:</label><input id="p8x1" value="1 2 3 4"><label>x2:</label><input id="p8x2" value="4 3 2 1"><label>a:</label><input id="p8a" type="number" value="2"><label>b:</label><input id="p8b" type="number" value="3"></div>
+<div class="code-box"><pre id="code-p8">clear all; close all;
+
+N=input('enter the value for N= ');
+x1=input('enter the x1 input x1=');
+x2=input('enter the x2 input x2=');
+a=input('enter the x2 input a=');
+b=input('enter the x2 input b=');
+
+y1=a.*x1+b.*x2;
+Y1=fft(y1,N);
+X1=fft(x1,N);
+X2=fft(x2,N);
+Y2=a.*X1+b.*X2;
+
+MagY1=abs(Y1);
+disp(MagY1);
+MagY2=abs(Y2);
+disp(MagY2);
+
+phaseY1=angle(Y1)*180/pi;
+phaseY2=angle(Y2)*180/pi;
+disp(phaseY1);
+disp(phaseY2);
+
+figure;
+k=0:1:(N-1);
+subplot(2,2,1);
+stem(k,MagY1);
+xlabel('N-point');
+ylabel('Magnitude of Y1');
+
+subplot(2,2,3);
+stem(k,MagY2);
+xlabel('N-point');
+ylabel('Magnitude of Y2');
+
+subplot(2,2,2);
+stem(k,phaseY1);
+xlabel('N-point');
+ylabel('phase of Y1');
+
+subplot(2,2,4);
+stem(k,phaseY2);
+xlabel('N-point');
+ylabel('phase of Y2');
+
+if isequal(Y1,Y2)
+disp('Linearity property satisfied for the given sequence');
+else
+disp('Linearity property not satisfied for the given sequence');
+end</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-p8')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runP8()">▶ Execute & Plot</button></div><div class="chart-container"><canvas id="chartP8"></canvas></div><div id="p8Result" class="result-box"></div></div>
+</section><div class="divider"></div>
+
+<!-- PROGRAM 9 -->
+<section id="p9">
+<div class="program-title"><h2>PROGRAM 9 – Parseval's Theorem of DFT</h2><p>Verification of Parseval's Theorem using DFT</p></div>
+<div class="info-card"><h2>🎯 Aim</h2><p>To verify Parseval's theorem using two input sequences and their DFTs.</p></div>
+<div class="info-card"><h2>📖 Theory</h2><p>Parseval's relation is <b>Σx₁[n]x₂*[n]=(1/N)ΣX₁[k]X₂*[k]</b>. It relates the inner product in time domain to the normalized inner product in frequency domain.</p></div>
+<div class="signal-card"><h2>Parseval's Theorem</h2><div class="input-area"><label>x1:</label><input id="p9x1" value="1 2 3 4"><label>x2:</label><input id="p9x2" value="4 3 2 1"><label>N:</label><input id="p9N" type="number" value="4"></div>
+<div class="code-box"><pre id="code-p9">clc;
+clear all;
+close all;
+
+x1=input('enter the 1st input seq=');
+x2=input('enter the 2nd input seq=');
+
+N=4;
+
+X1=fft(x1,N);
+X2=fft(x2,N);
+
+y1=sum(x1.*conj(x2));
+y2=sum(X1.*conj(X2))./N;
+
+if y1==y2
+    disp('parsevals theorem proved');
+else
+    disp('parsevals theorem not proved');
+end</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-p9')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runP9()">▶ Execute & Plot</button></div><div class="chart-container"><canvas id="chartP9"></canvas></div><div id="p9Result" class="result-box"></div></div>
+</section><div class="divider"></div>
+
+<!-- PROGRAM 10 -->
+<section id="p10">
+<div class="program-title"><h2>PROGRAM 10 – Butterworth Low-Pass IIR Filter</h2><p>Design of a Butterworth Low-Pass IIR Filter Using MATLAB</p></div>
+<div class="info-card"><h2>🎯 Aim</h2><p>To design a Butterworth low-pass IIR filter using <b>buttord()</b> and <b>butter()</b> and obtain its frequency response using <b>freqz()</b>.</p></div>
+<div class="info-card"><h2>📖 Theory</h2><p>The Butterworth filter has a maximally flat passband. The normalized frequencies are Wp=fp/(fs/2) and Ws=fstop/(fs/2). MATLAB's <b>buttord()</b> determines the minimum order and <b>butter()</b> designs the filter.</p></div>
+<div class="signal-card"><h2>Butterworth Low-Pass Filter</h2><div class="input-area"><label>Sampling frequency fs (Hz):</label><input id="p10fs" type="number" value="1000"><label>Passband attenuation kp (dB):</label><input id="p10kp" type="number" value="3"><label>Stopband attenuation ks (dB):</label><input id="p10ks" type="number" value="40"><label>Passband frequency fp (Hz):</label><input id="p10fp" type="number" value="100"><label>Stopband frequency fstop (Hz):</label><input id="p10fstop" type="number" value="200"></div>
+<div class="code-box"><pre id="code-p10">clc; clear all; close all;
+
+fs=input('Enter fs= ');
+kp=input('Enter kp= ');
+ks=input('Enter ks= ');
+fp=input('Enter fp= ');
+fstop=input('Enter fstop= ');
+
+wp=fp/(fs/2);
+wstop=fstop/(fs/2);
+
+[N wc]=buttord(wp,wstop,kp,ks)
+
+[b a]=butter(N,wc,'low');
+
+freqz(b,a,1000,fs);</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-p10')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runP10()">▶ Execute & Plot</button></div><div class="chart-container"><canvas id="chartP10"></canvas></div><div id="p10Result" class="result-box"></div></div>
+</section><div class="divider"></div>
+
+<!-- PROGRAM 11 -->
+<section id="p11">
+<div class="program-title"><h2>PROGRAM 11 – Butterworth High-Pass IIR Filter</h2><p>Design of a Butterworth High-Pass IIR Filter Using MATLAB</p></div>
+<div class="info-card"><h2>🎯 Aim</h2><p>To design a Butterworth high-pass IIR filter using <b>buttord()</b> and <b>butter()</b> and obtain its frequency response using <b>freqz()</b>.</p></div>
+<div class="info-card"><h2>📖 Theory</h2><p>A high-pass filter passes frequencies above the cutoff and attenuates frequencies below it. The Butterworth response provides a maximally flat passband.</p></div>
+<div class="signal-card"><h2>Butterworth High-Pass Filter</h2><div class="input-area"><label>Sampling frequency fs (Hz):</label><input id="p11fs" type="number" value="1000"><label>Passband attenuation kp (dB):</label><input id="p11kp" type="number" value="3"><label>Stopband attenuation ks (dB):</label><input id="p11ks" type="number" value="40"><label>Passband frequency fp (Hz):</label><input id="p11fp" type="number" value="200"><label>Stopband frequency fstop (Hz):</label><input id="p11fstop" type="number" value="100"></div>
+<div class="code-box"><pre id="code-p11">clc; clear all; close all;
+fs=input('Enter fs= '); kp=input('Enter kp= '); ks=input('Enter ks= '); fp=input('Enter fp= '); fstop=input('Enter fstop= '); wp=fp/(fs/2); wstop=fstop/(fs/2);
+[N wc]=buttord(wp,wstop,kp,ks)
+[b a]=butter(N,wc,'high');
+freqz(b,a,1000,fs)</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-p11')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runP11()">▶ Execute & Plot</button></div><div class="chart-container"><canvas id="chartP11"></canvas></div><div id="p11Result" class="result-box"></div></div>
+</section><div class="divider"></div>
+
+<!-- PROGRAM 12 -->
+<section id="p12">
+<div class="program-title"><h2>PROGRAM 12 – FIR Low-Pass Filters Using Window Methods</h2><p>Design of FIR Low-Pass Filters Using Hamming and Hanning Windows</p></div>
+<div class="info-card"><h2>🎯 Aim</h2><p>To design FIR low-pass filters using Hamming and Hanning windows and obtain their frequency responses.</p></div>
+<div class="info-card"><h2>📖 Theory</h2><p>FIR filters have finite impulse responses and can provide linear phase. The window method truncates an ideal impulse response. Hamming and Hanning windows reduce side lobes and control ripples.</p><p><b>Normalized cutoff:</b> Wc=fc/(fs/2).</p></div>
+
+<div class="signal-card"><h2>12.1 FIR Low-Pass Using Hamming Window</h2><div class="input-area"><label>Filter Order N:</label><input id="p12N" type="number" value="20" min="1"><label>Sampling Frequency fs (Hz):</label><input id="p12fs" type="number" value="1000"><label>Cutoff Frequency fc (Hz):</label><input id="p12fc" type="number" value="200"></div>
+<div class="code-box"><pre id="code-p12">clc; clear all; close all;
+
+N=input('Enter N= ');
+fs=input('Enter fs= ');
+fc=input('Enter fc= ');
+wc=fc/(fs/2);
+h=fir1(N,wc,'low',hamming(N+1));
+freqz(h,1,512,fs)</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-p12')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runP12()">▶ Execute & Plot</button></div>
+<div class="chart-container"><canvas id="chartP12"></canvas></div><div id="p12Result" class="result-box">Click <b>Execute & Plot</b>.</div></div>
+
+<div class="signal-card"><h2>12.2 FIR Low-Pass Using Hanning Window</h2><div class="input-area"><label>Filter Order N:</label><input id="p12hN" type="number" value="20" min="1"><label>Sampling Frequency fs (Hz):</label><input id="p12hfs" type="number" value="1000"><label>Cutoff Frequency fc (Hz):</label><input id="p12hfc" type="number" value="200"></div>
+<div class="code-box"><pre id="code-p12h">clc; clear all; close all;
+N=input('Enter N= '); fs=input('Enter fs= '); fc=input('Enter fc= '); wc=fc/(fs/2); h=fir1(N,wc,'low',hanning(N+1)); freqz(h,1,512,fs)</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-p12h')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runP12Hanning()">▶ Execute & Plot</button></div>
+<div class="chart-container"><canvas id="chartP12Hanning"></canvas></div><div id="p12HanningResult" class="result-box">Click <b>Execute & Plot</b>.</div></div>
+<div class="result">Result: FIR low-pass filters are designed using Hamming and Hanning windows.</div>
+</section><div class="divider"></div>
+
+<!-- PROGRAM 13 -->
+<section id="p13">
+<div class="program-title"><h2>PROGRAM 13 – FIR High-Pass Filter Using Hamming Window</h2><p>Design of an FIR High-Pass Filter Using Hamming Window</p></div>
+<div class="info-card"><h2>🎯 Aim</h2><p>To design an FIR high-pass filter using the Hamming window and obtain its frequency response using MATLAB.</p></div>
+<div class="info-card"><h2>📖 Theory</h2><p>A high-pass FIR filter attenuates low frequencies and passes frequencies above the cutoff. The Hamming window reduces side lobes.</p><p style="text-align:center;font-size:21px;font-weight:bold">Wc=fc/(fs/2)</p></div>
+<div class="info-card"><h2>⚙️ Algorithm</h2><ol><li>Enter N, fs and fc.</li><li>Calculate normalized cutoff.</li><li>Generate Hamming window.</li><li>Design high-pass FIR filter using fir1().</li><li>Obtain frequency response using freqz().</li><li>Plot and observe the response.</li></ol></div>
+<div class="signal-card"><h2>FIR High-Pass Filter</h2><div class="input-area"><label>Filter Order N:</label><input id="p13N" type="number" value="20"><label>Sampling Frequency fs (Hz):</label><input id="p13fs" type="number" value="1000"><label>Cutoff Frequency fc (Hz):</label><input id="p13fc" type="number" value="200"></div>
+<div class="code-box"><pre id="code-p13">clc; clear all; close all;
+
+N=input('Enter N= ');
+fs=input('Enter fs= ');
+fc=input('Enter fc= ');
+
+wc=fc/(fs/2);
+
+h=fir1(N,wc,'high',hamming(N+1));
+
+freqz(h,1,512,fs)</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-p13')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runP13()">▶ Execute & Plot</button></div>
+<div class="chart-container"><canvas id="chartP13"></canvas></div><div id="p13Result" class="result-box">Click <b>Execute & Plot</b>.</div>
+<div class="result">Result: An FIR high-pass filter is designed using the Hamming window.</div></div>
+</section><div class="divider"></div>
+
+<!-- PROGRAM 14 -->
+<section id="p14">
+<div class="program-title"><h2>PROGRAM 14 – FIR High-Pass Filter Using Hamming Window</h2><p>Separate Magnitude and Phase Frequency Response</p></div>
+<div class="info-card"><h2>🎯 Aim</h2><p>To design an FIR high-pass filter using the Hamming window and obtain separate magnitude and phase frequency responses.</p></div>
+<div class="info-card"><h2>📖 Theory</h2><p>The window method is used to design the high-pass FIR filter. The Hamming window controls side lobes. <b>freqz()</b> provides magnitude and phase response.</p></div>
+<div class="info-card"><h2>⚙️ Algorithm</h2><ol><li>Enter filter order N.</li><li>Enter fs and fc.</li><li>Calculate Wc=fc/(fs/2).</li><li>Generate Hamming window.</li><li>Design the high-pass FIR filter.</li><li>Calculate frequency response.</li><li>Plot magnitude separately.</li><li>Plot phase separately.</li></ol></div>
+<div class="signal-card"><h2>FIR High-Pass Filter – Separate Plots</h2><div class="input-area"><label>Filter Order N:</label><input id="p14N" type="number" value="20" min="1"><label>Sampling Frequency fs (Hz):</label><input id="p14fs" type="number" value="1000"><label>Cutoff Frequency fc (Hz):</label><input id="p14fc" type="number" value="200"></div>
+<div class="code-box"><pre id="code-p14">clc; clear all; close all;
+N=input('Enter N= '); fs=input('Enter fs= '); fc=input('Enter fc= '); wc=fc/(fs/2); h=fir1(N,wc,'high',hamming(N+1)); freqz(h,1,512,fs)</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-p14')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runP14()">▶ Execute & Plot</button></div>
+<h3 style="color:#3730a3">📈 Magnitude Response</h3><div class="chart-container"><canvas id="chartP14Magnitude"></canvas></div>
+<h3 style="color:#3730a3">📐 Phase Response</h3><div class="chart-container"><canvas id="chartP14Phase"></canvas></div>
+<div id="p14Result" class="result-box">Click <b>Execute & Plot</b> to design the FIR high-pass filter.</div>
+<div class="result">Result: Magnitude and phase responses are displayed as two separate plots.</div></div>
+</section>
+
+
+<!-- PROGRAM 15 -->
+<section id="p15">
+<div class="program-title"><h2>PROGRAM 15 – Sampling Theorem</h2><p>Continuous-Time and Discrete-Time Representation of a Sinusoidal Signal for Different Sampling Frequencies</p></div>
+<div class="info-card"><h2>🎯 Aim</h2><p>To study the effect of sampling frequency on a sinusoidal signal and observe the sampled signal for different values of <b>f<sub>s</sub></b> relative to <b>2f<sub>m</sub></b>.</p></div>
+<div class="info-card"><h2>📖 Theory</h2><p>According to the sampling theorem, a band-limited signal of maximum frequency <b>f<sub>m</sub></b> can be reconstructed without aliasing when the sampling frequency satisfies <b>f<sub>s</sub> ≥ 2f<sub>m</sub></b>. The three important cases are under-sampling, Nyquist-rate sampling, and over-sampling.</p></div>
+<div class="info-card"><h2>⚙️ Observation</h2><ol><li>The continuous-time cosine signal is first generated.</li><li>The signal is sampled at different sampling frequencies.</li><li>The sampled values are displayed using stem plots.</li><li>The plots show how the sampling frequency affects the representation of the original signal.</li></ol></div>
+<div class="signal-card"><h2>Sampling Theorem – Four Plots</h2>
+<div class="code-box"><pre id="code-p15">clc;
+
+clear all;
+
+t=-100:01:100;
+
+fm=0.01;
+
+x=cos(2*pi*t*fm);
+
+subplot(2,2,1)
+plot(t,x);
+xlabel('time in sec');
+ylabel ('x(t)');
+title ('continuous time signal ');
+
+fs1=0.02;
+n=-2:2;
+x1=cos(2*pi*fm*n/fs1);
+subplot(2,2,2);
+stem(n,x1);
+hold on;
+subplot(2,2,2);
+plot(n,x1,':');
+title('discrete time signal x(n) with fs<2fm');
+xlabel('n');
+ylabel('x(n)');
+
+fs2=0.04;
+n1=-4:4;
+x2=cos(2*pi*fm*n1/fs2);
+subplot(2,2,3);
+plot(n1,x2,':');
+stem (n1,x2);
+hold on;
+subplot(2,2,3);
+plot(n1,x2,':');
+title('discrete time signal x(n) with fs>2fm');
+xlabel('n');
+ylabel('x(n)');
+
+n2=-50:50;
+fs3=0.5;
+x3=cos(2*pi*fm*n2/fs3);
+subplot(2,2,4);
+stem (n2,x3);
+hold on;
+subplot(2,2,4);
+plot(n2,x3,':');
+xlabel('n');
+ylabel('x(n)');
+title('discrete time signal x(n) with fs=2fm');</pre></div>
+<div class="button-area"><button class="copy-btn" onclick="copyCode('code-p15')">📋 Copy MATLAB Code</button><button class="run-btn" onclick="runP15()">▶ Execute & Plot</button></div>
+<div class="chart-grid">
+<div><h3 style="color:#3730a3">1. Continuous-Time Signal</h3><div class="chart-container"><canvas id="chartP15_1"></canvas></div></div>
+<div><h3 style="color:#3730a3">2. Sampling Case – fs1</h3><div class="chart-container"><canvas id="chartP15_2"></canvas></div></div>
+<div><h3 style="color:#3730a3">3. Sampling Case – fs2</h3><div class="chart-container"><canvas id="chartP15_3"></canvas></div></div>
+<div><h3 style="color:#3730a3">4. Sampling Case – fs3</h3><div class="chart-container"><canvas id="chartP15_4"></canvas></div></div>
+</div>
+<div id="p15Result" class="result-box">Click <b>Execute & Plot</b> to display all four plots.</div>
+<div class="result"><b>Important:</b> In the supplied code, <b>fm = 0.01</b>, so <b>2fm = 0.02</b>. Therefore <b>fs1 = 0.02</b> is exactly the Nyquist rate (not fs&lt;2fm), while <b>fs3 = 0.5</b> is greater than 2fm (not fs=2fm). The code is preserved exactly as supplied.</div>
+</div>
+</section>
+
+</div>
+
+<footer>
+<b>Digital Signal Processing Laboratory</b><br>
+Interactive Programs 1–15
+</footer>
+
+<script>
+let charts={};
+
+function copyCode(id){
+ const code=document.getElementById(id).innerText;
+ if(navigator.clipboard){
+   navigator.clipboard.writeText(code).then(()=>alert("MATLAB code copied successfully!")).catch(()=>alert("Unable to copy code."));
+ }else{
+   const ta=document.createElement("textarea");ta.value=code;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove();alert("MATLAB code copied successfully!");
+ }
+}
+function destroyChart(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
+function parseVector(value){
+ value=String(value).replace(/\[/g,"").replace(/\]/g,"").replace(/,/g," ");
+ return value.trim().split(/\s+/).map(Number).filter(v=>!isNaN(v));
+}
+function drawStemChart(id,x,y,title,xLabel="n",yLabel="Amplitude"){
+ destroyChart(id);const ctx=document.getElementById(id).getContext("2d");
+ charts[id]=new Chart(ctx,{type:"scatter",data:{datasets:[{label:title,data:x.map((v,i)=>({x:v,y:y[i]})),showLine:true,pointRadius:4,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:title,font:{size:18}},legend:{display:false}},scales:{x:{type:"linear",title:{display:true,text:xLabel}},y:{title:{display:true,text:yLabel}}}}});
+}
+function drawMultiChart(id,series,title,xLabel="n",yLabel="Amplitude"){
+ destroyChart(id);const ctx=document.getElementById(id).getContext("2d");
+ charts[id]=new Chart(ctx,{type:"scatter",data:{datasets:series.map(s=>({label:s.label,data:s.x.map((v,i)=>({x:v,y:s.y[i]})),showLine:true,pointRadius:4,borderWidth:2}))},options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:title,font:{size:18}},legend:{display:true}},scales:{x:{type:"linear",title:{display:true,text:xLabel}},y:{title:{display:true,text:yLabel}}}}});
+}
+function drawLineChart(id,x,y,title,xLabel,yLabel){
+ destroyChart(id);const ctx=document.getElementById(id).getContext("2d");
+ charts[id]=new Chart(ctx,{type:"line",data:{labels:x,datasets:[{label:title,data:y,borderWidth:2,pointRadius:0,tension:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:title,font:{size:18}},legend:{display:false}},scales:{x:{title:{display:true,text:xLabel}},y:{title:{display:true,text:yLabel}}}}});
+}
+
+function runUnitSample(){const n=[];const y=[];for(let i=-10;i<=10;i++){n.push(i);y.push(i===0?1:0)}drawStemChart("chartUnitSample",n,y,"Unit Sample Sequence");}
+function runUnitStep(){const N=parseInt(document.getElementById("stepN").value);if(!N||N<1){alert("Enter a valid positive n value.");return}const n=Array.from({length:N},(_,i)=>i),y=n.map(()=>1);drawStemChart("chartUnitStep",n,y,"Discrete Time Unit Step Function","Time","Amplitude");}
+function runExponential(){const n1=+document.getElementById("expN1").value,n2=+document.getElementById("expN2").value,a=+document.getElementById("expA").value;if(n2<n1){alert("Ending n must be greater than or equal to starting n.");return}const n=[],y=[];for(let i=n1;i<=n2;i++){n.push(i);y.push(Math.pow(a,i))}drawStemChart("chartExponential",n,y,"Exponential Sequence (a = "+a+")");}
+function runSinusoidal(){const t=[],y=[];for(let i=0;i<=5000;i++){const v=i*.001;t.push(v);y.push(Math.sin(2*Math.PI*v))}drawLineChart("chartSinusoidal",t,y,"Sine Wave","Time (s)","Amplitude");}
+function runRandom(){const n=Array.from({length:41},(_,i)=>i),y=n.map(()=>Math.random());drawStemChart("chartRandom",n,y,"Random Sequence");}
+function runAddition(){const a=parseVector(document.getElementById("addX1").value),b=parseVector(document.getElementById("addX2").value);if(a.length!==b.length){alert("Both signals must have the same length.");return}const n=a.map((_,i)=>i),y=a.map((v,i)=>v+b[i]);drawMultiChart("chartAddition",[{label:"x1[n]",x:n,y:a},{label:"x2[n]",x:n,y:b},{label:"x1[n]+x2[n]",x:n,y:y}],"Addition of Two Signals");document.getElementById("additionResult").innerHTML="<b>Resultant Signal:</b> ["+y.join(", ")+"]";}
+function runMultiplication(){const n=[],a=[],b=[],y=[];for(let i=-10;i<=10;i++){n.push(i);a.push(Math.sin(.2*Math.PI*i));b.push(Math.cos(.2*Math.PI*i));y.push(a[a.length-1]*b[b.length-1])}drawMultiChart("chartMultiplication",[{label:"x1[n]",x:n,y:a},{label:"x2[n]",x:n,y:b},{label:"x1[n] × x2[n]",x:n,y:y}],"Signal Multiplication");}
+function runScaling(){const n=[],x=[],y=[];for(let i=-10;i<=10;i++){n.push(i);x.push(Math.sin(.2*Math.PI*i));y.push(2*Math.sin(.2*Math.PI*i))}drawMultiChart("chartScaling",[{label:"Original x[n]",x:n,y:x},{label:"Scaled 2x[n]",x:n,y:y}],"Signal Scaling");}
+function runLeftShift(){const n=[],x=[],ns=[],xs=[];for(let i=-10;i<=10;i++){n.push(i);x.push(Math.sin(.2*Math.PI*i));ns.push(i-3);xs.push(Math.sin(.2*Math.PI*i))}drawMultiChart("chartLeftShift",[{label:"Original x[n]",x:n,y:x},{label:"Left Shifted x[n+3]",x:ns,y:xs}],"Left Shift by 3 Samples");}
+function runRightShift(){const n=[],x=[],ns=[],xs=[];for(let i=-10;i<=10;i++){n.push(i);x.push(Math.sin(.2*Math.PI*i));ns.push(i+3);xs.push(Math.sin(.2*Math.PI*i))}drawMultiChart("chartRightShift",[{label:"Original x[n]",x:n,y:x},{label:"Right Shifted x[n-3]",x:ns,y:xs}],"Right Shift by 3 Samples");}
+function runFoldCosine(){const n=Array.from({length:21},(_,i)=>i-10),x=n.map(v=>Math.cos(.2*Math.PI*v)),f=[...x].reverse();drawMultiChart("chartFoldCosine",[{label:"x[n]",x:n,y:x},{label:"x[-n]",x:n,y:f}],"Folding of Cosine Signal");}
+function runFoldRamp(){const n=Array.from({length:11},(_,i)=>i-5),x=n.slice(),f=[...x].reverse();drawMultiChart("chartFoldRamp",[{label:"x[n]",x:n,y:x},{label:"x[-n]",x:n,y:f}],"Folding of Ramp Signal");}
+function runFoldGiven(){const n=Array.from({length:11},(_,i)=>i-5),x=[0,0,1,2,3,4,5,4,2,1,0],f=[...x].reverse();drawMultiChart("chartFoldGiven",[{label:"x[n]",x:n,y:x},{label:"x[-n]",x:n,y:f}],"Folding of Given Sequence");}
+
+function linearConvolution(x,h){const y=new Array(x.length+h.length-1).fill(0);for(let n=0;n<y.length;n++)for(let k=0;k<x.length;k++){const j=n-k;if(j>=0&&j<h.length)y[n]+=x[k]*h[j]}return y}
+function runConvolution(){const x=parseVector(document.getElementById("convX").value),h=parseVector(document.getElementById("convH").value);if(!x.length||!h.length){alert("Enter valid sequences.");return}const y=linearConvolution(x,h),nx=x.map((_,i)=>i),nh=h.map((_,i)=>i),ny=y.map((_,i)=>i);drawMultiChart("chartConvolution",[{label:"x[n]",x:nx,y:x},{label:"h[n]",x:nh,y:h},{label:"y[n]=x[n]*h[n]",x:ny,y:y}],"Linear Convolution");document.getElementById("convolutionResult").innerHTML="<b>Linear Convolution Result:</b> ["+y.map(v=>v.toFixed(6)).join(", ")+"]";}
+
+function dft(x,N){const X=[];for(let k=0;k<N;k++){let real=0,imag=0;for(let n=0;n<N;n++){const v=n<x.length?x[n]:0,ang=-2*Math.PI*k*n/N;real+=v*Math.cos(ang);imag+=v*Math.sin(ang)}X.push({real,imag})}return X}
+function idft(X,N){const x=[];for(let n=0;n<N;n++){let real=0,imag=0;for(let k=0;k<N;k++){const ang=2*Math.PI*k*n/N;real+=X[k].real*Math.cos(ang)-X[k].imag*Math.sin(ang);imag+=X[k].real*Math.sin(ang)+X[k].imag*Math.cos(ang)}x.push({real:real/N,imag:imag/N})}return x}
+function cmul(a,b){return{real:a.real*b.real-a.imag*b.imag,imag:a.real*b.imag+a.imag*b.real}}
+function cadd(a,b){return{real:a.real+b.real,imag:a.imag+b.imag}}
+function cscale(a,s){return{real:a.real*s,imag:a.imag*s}}
+function maxDiff(A,B){let m=0;for(let i=0;i<A.length;i++)m=Math.max(m,Math.hypot(A[i].real-B[i].real,A[i].imag-B[i].imag));return m}
+
+function runDFT(){const x=parseVector(document.getElementById("dftX").value);if(!x.length){alert("Enter a valid sequence.");return}const N=x.length,X=dft(x,N),k=X.map((_,i)=>i),mag=X.map(v=>Math.hypot(v.real,v.imag)),ph=X.map(v=>Math.atan2(v.imag,v.real));destroyChart("chartDFT");const ctx=document.getElementById("chartDFT").getContext("2d");charts.chartDFT=new Chart(ctx,{type:"scatter",data:{datasets:[{label:"Magnitude",data:k.map((v,i)=>({x:v,y:mag[i]})),showLine:true,pointRadius:4,borderWidth:2},{label:"Phase (radians)",data:k.map((v,i)=>({x:v,y:ph[i]})),showLine:true,pointRadius:4,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:"N-Point DFT"},legend:{display:true}},scales:{x:{type:"linear",title:{display:true,text:"k"}},y:{title:{display:true,text:"Magnitude / Phase"}}}}});document.getElementById("dftResult").innerHTML="<b>Magnitude:</b> ["+mag.map(v=>v.toFixed(4)).join(", ")+"]<br><br><b>Phase (radians):</b> ["+ph.map(v=>v.toFixed(4)).join(", ")+"]";}
+
+function runP5(){const x=parseVector(document.getElementById("p5x").value),h1=parseVector(document.getElementById("p5h1").value),h2=parseVector(document.getElementById("p5h2").value),N=parseInt(document.getElementById("p5N").value);if(!x.length||!h1.length||!h2.length||!N){alert("Enter valid values.");return}if(N<Math.max(x.length,h1.length,h2.length)){alert("N must be at least the length of the longest sequence.");return}const X=dft(x,N),H1=dft(h1,N),H2=dft(h2,N),Y1=X.map((v,i)=>cmul(v,H1[i])),Y2=H1.map((v,i)=>cmul(v,X[i])),Y3=Y1.map((v,i)=>cmul(v,H2[i])),Y4=X.map((v,i)=>cmul(v,cmul(H1[i],H2[i]))),Y5=X.map((v,i)=>cmul(v,cadd(H1[i],H2[i]))),Y6=X.map((v,i)=>cadd(cmul(v,H1[i]),cmul(v,H2[i])));const a=idft(Y1,N),b=idft(Y2,N),c=idft(Y3,N),d=idft(Y4,N),e=idft(Y5,N),f=idft(Y6,N),ok1=maxDiff(a,b)<1e-6,ok2=maxDiff(c,d)<1e-6,ok3=maxDiff(e,f)<1e-6,n=Array.from({length:N},(_,i)=>i);drawMultiChart("chartP5",[{label:"y1 X.*H1",x:n,y:a.map(v=>v.real)},{label:"y2 H1.*X",x:n,y:b.map(v=>v.real)},{label:"y3 (X.*H1).*H2",x:n,y:c.map(v=>v.real)},{label:"y4 X.*(H1.*H2)",x:n,y:d.map(v=>v.real)},{label:"y5 X.*(H1+H2)",x:n,y:e.map(v=>v.real)},{label:"y6 X.*H1+X.*H2",x:n,y:f.map(v=>v.real)}],"Convolution Properties");document.getElementById("p5Result").innerHTML="<b>Commutative:</b> "+(ok1?"✅ Verified":"❌ Not verified")+"<br><b>Associative:</b> "+(ok2?"✅ Verified":"❌ Not verified")+"<br><b>Distributive:</b> "+(ok3?"✅ Verified":"❌ Not verified");}
+
+function runP6(){const x=parseVector(document.getElementById("fftConvX").value),y=parseVector(document.getElementById("fftConvY").value);if(!x.length||!y.length){alert("Enter valid sequences.");return}const N=x.length+y.length-1,X=dft(x,N),Y=dft(y,N),Z=X.map((v,i)=>cmul(v,Y[i])),z=idft(Z,N),nx=x.map((_,i)=>i),ny=y.map((_,i)=>i),nz=z.map((_,i)=>i);drawMultiChart("chartP6",[{label:"x[n]",x:nx,y:x},{label:"y[n]",x:ny,y:y},{label:"Linear Convolution",x:nz,y:z.map(v=>v.real)}],"Linear Convolution Using FFT");document.getElementById("p6Result").innerHTML="<b>Result:</b> ["+z.map(v=>v.real.toFixed(6)).join(", ")+"]";}
+
+function runCircularConvolution(){const x=parseVector(document.getElementById("circX").value),y=parseVector(document.getElementById("circY").value);if(!x.length||!y.length){alert("Enter valid sequences.");return}const N=Math.max(x.length,y.length),X=dft(x,N),Y=dft(y,N),Z=X.map((v,i)=>cmul(v,Y[i])),z=idft(Z,N),n=Array.from({length:N},(_,i)=>i);drawMultiChart("chartCircular",[{label:"x[n]",x:x.map((_,i)=>i),y:x},{label:"y[n]",x:y.map((_,i)=>i),y:y},{label:"Circular Convolution",x:n,y:z.map(v=>v.real)}],"Circular Convolution");document.getElementById("circularResult").innerHTML="<b>Circular Convolution Result:</b> ["+z.map(v=>v.real.toFixed(6)).join(", ")+"]";}
+
+function runP8(){const N=parseInt(document.getElementById("p8N").value),x1=parseVector(document.getElementById("p8x1").value),x2=parseVector(document.getElementById("p8x2").value),a=+document.getElementById("p8a").value,b=+document.getElementById("p8b").value;if(!N||!x1.length||!x2.length||N<Math.max(x1.length,x2.length)){alert("Use valid sequences and N at least as large as both sequences.");return}const y=x1.map((v,i)=>a*v+b*x2[i]),Y1=dft(y,N),X1=dft(x1,N),X2=dft(x2,N),Y2=X1.map((v,i)=>cadd(cscale(v,a),cscale(X2[i],b))),ok=maxDiff(Y1,Y2)<1e-6,k=Array.from({length:N},(_,i)=>i),m1=Y1.map(v=>Math.hypot(v.real,v.imag)),m2=Y2.map(v=>Math.hypot(v.real,v.imag));drawMultiChart("chartP8",[{label:"|Y1[k]|",x:k,y:m1},{label:"|Y2[k]|",x:k,y:m2}],"DFT Linearity – Magnitude","k","Magnitude");document.getElementById("p8Result").innerHTML="<b>Linearity Property:</b> "+(ok?"✅ Satisfied":"❌ Not satisfied")+"<br>Maximum difference = "+maxDiff(Y1,Y2).toExponential(3);}
+
+function runP9(){const x1=parseVector(document.getElementById("p9x1").value),x2=parseVector(document.getElementById("p9x2").value),N=parseInt(document.getElementById("p9N").value);if(x1.length!==x2.length||N<x1.length){alert("Both sequences must have the same length and N must be at least that length.");return}let time=0;for(let i=0;i<x1.length;i++)time+=x1[i]*x2[i];const X1=dft(x1,N),X2=dft(x2,N);let freq={real:0,imag:0};for(let k=0;k<N;k++){freq=cadd(freq,cmul(X1[k],{real:X2[k].real,imag:-X2[k].imag}))}freq.real/=N;freq.imag/=N;const diff=Math.hypot(time-freq.real,freq.imag),k=Array.from({length:N},(_,i)=>i);drawMultiChart("chartP9",[{label:"|X1[k]|",x:k,y:X1.map(v=>Math.hypot(v.real,v.imag))},{label:"|X2[k]|",x:k,y:X2.map(v=>Math.hypot(v.real,v.imag))}],"DFT Spectra","k","Magnitude");document.getElementById("p9Result").innerHTML="<b>Time-domain value:</b> "+time.toFixed(6)+"<br><b>Frequency-domain value:</b> "+freq.real.toFixed(6)+"<br><b>Difference:</b> "+diff.toExponential(3)+"<br><br>"+(diff<1e-6?"✅ Parseval's theorem proved":"❌ Parseval's theorem not proved");}
+
+function butterOrder(wp,ws,kp,ks,low){const ratio=low?ws/wp:wp/ws;return Math.ceil(Math.log10((Math.pow(10,ks/10)-1)/(Math.pow(10,kp/10)-1))/(2*Math.log10(ratio)))}
+function runP10(){const fs=+document.getElementById("p10fs").value,kp=+document.getElementById("p10kp").value,ks=+document.getElementById("p10ks").value,fp=+document.getElementById("p10fp").value,fsTop=+document.getElementById("p10fstop").value;if(!(fs>0&&fp>0&&fsTop>fp&&fsTop<fs/2&&fp<fs/2&&ks>kp)){alert("For low-pass: 0<fp<fstop<fs/2 and ks>kp.");return}const wp=fp/(fs/2),ws=fsTop/(fs/2),N=butterOrder(wp,ws,kp,ks,true),wc=wp/Math.pow(Math.pow(10,kp/10)-1,1/(2*N));const f=[],mag=[],phase=[];for(let i=0;i<1000;i++){const fr=i*(fs/2)/999,w=fr/(fs/2),r=Math.max(w,1e-9)/wc,m=1/Math.sqrt(1+Math.pow(r,2*N));f.push(fr);mag.push(20*Math.log10(Math.max(m,1e-12)));phase.push(-Math.atan2(Math.sin(N*Math.atan(r)),Math.cos(N*Math.atan(r)))*180/Math.PI)}drawMultiChart("chartP10",[{label:"Magnitude (dB)",x:f,y:mag},{label:"Phase (degrees)",x:f,y:phase}],"Butterworth Low-Pass Response","Frequency (Hz)","Magnitude / Phase");document.getElementById("p10Result").innerHTML="<b>Approximate browser emulation of MATLAB buttord/butter/freqz.</b><br><br>Normalized Wp = "+wp.toFixed(4)+"<br>Normalized Ws = "+ws.toFixed(4)+"<br>Estimated filter order N = "+N+"<br>Approximate normalized cutoff = "+wc.toFixed(4);}
+function runP11(){const fs=+document.getElementById("p11fs").value,kp=+document.getElementById("p11kp").value,ks=+document.getElementById("p11ks").value,fp=+document.getElementById("p11fp").value,fsTop=+document.getElementById("p11fstop").value;if(!(fs>0&&fsTop>0&&fsTop<fp&&fp<fs/2&&ks>kp)){alert("For high-pass: 0<fstop<fp<fs/2 and ks>kp.");return}const wp=fp/(fs/2),ws=fsTop/(fs/2),N=butterOrder(wp,ws,kp,ks,false),wc=wp*Math.pow(Math.pow(10,kp/10)-1,1/(2*N));const f=[],mag=[],phase=[];for(let i=0;i<1000;i++){const fr=i*(fs/2)/999,w=Math.max(fr/(fs/2),1e-9),r=wc/w,m=1/Math.sqrt(1+Math.pow(r,2*N));f.push(fr);mag.push(20*Math.log10(Math.max(m,1e-12)));phase.push(-Math.atan2(Math.sin(N*Math.atan(r)),Math.cos(N*Math.atan(r)))*180/Math.PI)}drawMultiChart("chartP11",[{label:"Magnitude (dB)",x:f,y:mag},{label:"Phase (degrees)",x:f,y:phase}],"Butterworth High-Pass Response","Frequency (Hz)","Magnitude / Phase");document.getElementById("p11Result").innerHTML="<b>Approximate browser emulation of MATLAB buttord/butter/freqz.</b><br><br>Normalized Wp = "+wp.toFixed(4)+"<br>Normalized Ws = "+ws.toFixed(4)+"<br>Estimated filter order N = "+N+"<br>Approximate normalized cutoff = "+wc.toFixed(4);}
+
+function firResponse(N,fs,fc,type,windowType){const wc=fc/(fs/2),h=[];for(let n=0;n<=N;n++){const m=n-N/2;let hd;if(type==="low")hd=Math.abs(m)<1e-12?wc:Math.sin(Math.PI*wc*m)/(Math.PI*m);else hd=Math.abs(m)<1e-12?1-wc:-Math.sin(Math.PI*wc*m)/(Math.PI*m);const w=windowType==="hamming"?0.54-0.46*Math.cos(2*Math.PI*n/N):0.5-0.5*Math.cos(2*Math.PI*n/N);h.push(hd*w)}const f=[],mag=[],ph=[];for(let i=0;i<512;i++){const fr=i*(fs/2)/511,om=2*Math.PI*fr/fs;let re=0,im=0;for(let n=0;n<=N;n++){re+=h[n]*Math.cos(-om*n);im+=h[n]*Math.sin(-om*n)}f.push(fr);mag.push(20*Math.log10(Math.max(Math.hypot(re,im),1e-12)));ph.push(Math.atan2(im,re)*180/Math.PI)}return{f,mag,ph,wc}}
+function runP12(){const N=+document.getElementById("p12N").value,fs=+document.getElementById("p12fs").value,fc=+document.getElementById("p12fc").value;if(!(N>0&&fs>0&&fc>0&&fc<fs/2)){alert("Enter valid N, fs and fc.");return}const r=firResponse(N,fs,fc,"low","hamming");destroyChart("chartP12");const ctx=document.getElementById("chartP12").getContext("2d");charts.chartP12=new Chart(ctx,{type:"line",data:{labels:r.f,datasets:[{label:"Magnitude Response (dB)",data:r.mag,borderWidth:2,pointRadius:0},{label:"Phase Response (degrees)",data:r.ph,borderWidth:2,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:"FIR Low-Pass Using Hamming Window"},legend:{display:true}},scales:{x:{type:"linear",title:{display:true,text:"Frequency (Hz)"}},y:{title:{display:true,text:"Magnitude (dB) / Phase (degrees)"}}}}});document.getElementById("p12Result").innerHTML="N = "+N+"<br>fs = "+fs+" Hz<br>fc = "+fc+" Hz<br>Normalized Wc = "+r.wc.toFixed(4)+"<br>Window = Hamming<br>Coefficients = "+(N+1);}
+function runP12Hanning(){const N=+document.getElementById("p12hN").value,fs=+document.getElementById("p12hfs").value,fc=+document.getElementById("p12hfc").value;if(!(N>0&&fs>0&&fc>0&&fc<fs/2)){alert("Enter valid N, fs and fc.");return}const r=firResponse(N,fs,fc,"low","hanning");destroyChart("chartP12Hanning");const ctx=document.getElementById("chartP12Hanning").getContext("2d");charts.chartP12Hanning=new Chart(ctx,{type:"line",data:{labels:r.f,datasets:[{label:"Magnitude Response (dB)",data:r.mag,borderWidth:2,pointRadius:0},{label:"Phase Response (degrees)",data:r.ph,borderWidth:2,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:"FIR Low-Pass Using Hanning Window"},legend:{display:true}},scales:{x:{type:"linear",title:{display:true,text:"Frequency (Hz)"}},y:{title:{display:true,text:"Magnitude (dB) / Phase (degrees)"}}}}});document.getElementById("p12HanningResult").innerHTML="N = "+N+"<br>fs = "+fs+" Hz<br>fc = "+fc+" Hz<br>Normalized Wc = "+r.wc.toFixed(4)+"<br>Window = Hanning<br>Coefficients = "+(N+1);}
+
+function runP13(){const N=+document.getElementById("p13N").value,fs=+document.getElementById("p13fs").value,fc=+document.getElementById("p13fc").value;if(!(N>0&&fs>0&&fc>0&&fc<fs/2)){alert("Enter valid N, fs and fc.");return}const r=firResponse(N,fs,fc,"high","hamming");destroyChart("chartP13");const ctx=document.getElementById("chartP13").getContext("2d");charts.chartP13=new Chart(ctx,{type:"line",data:{labels:r.f,datasets:[{label:"Magnitude Response (dB)",data:r.mag,borderWidth:2,pointRadius:0},{label:"Phase Response (degrees)",data:r.ph,borderWidth:2,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:"FIR High-Pass Using Hamming Window"},legend:{display:true}},scales:{x:{type:"linear",title:{display:true,text:"Frequency (Hz)"}},y:{title:{display:true,text:"Magnitude (dB) / Phase (degrees)"}}}}});document.getElementById("p13Result").innerHTML="N = "+N+"<br>fs = "+fs+" Hz<br>fc = "+fc+" Hz<br>Normalized Wc = "+r.wc.toFixed(4)+"<br>Window = Hamming<br>Coefficients = "+(N+1);}
+
+
+function runP15(){
+ const fm=0.01;
+ const t=Array.from({length:201},(_,i)=>-100+i), x=t.map(v=>Math.cos(2*Math.PI*v*fm));
+ const fs1=0.02,n=Array.from({length:5},(_,i)=>-2+i),x1=n.map(v=>Math.cos(2*Math.PI*fm*v/fs1));
+ const fs2=0.04,n1=Array.from({length:9},(_,i)=>-4+i),x2=n1.map(v=>Math.cos(2*Math.PI*fm*v/fs2));
+ const fs3=0.5,n2=Array.from({length:101},(_,i)=>-50+i),x3=n2.map(v=>Math.cos(2*Math.PI*fm*v/fs3));
+ drawLineChart('chartP15_1',t,x,'Continuous-Time Signal x(t)','Time (sec)','x(t)');
+ drawStemChart('chartP15_2',n,x1,'Discrete-Time Signal x(n), fs1 = 2fm','n','x(n)');
+ drawStemChart('chartP15_3',n1,x2,'Discrete-Time Signal x(n), fs2 > 2fm','n','x(n)');
+ drawStemChart('chartP15_4',n2,x3,'Discrete-Time Signal x(n), fs3 > 2fm','n','x(n)');
+ document.getElementById('p15Result').innerHTML='<b>Plots generated successfully.</b><br>fm = 0.01 Hz, 2fm = 0.02 Hz.<br>fs1 = 0.02 Hz = 2fm; fs2 = 0.04 Hz > 2fm; fs3 = 0.5 Hz > 2fm.';
+}
+
+function runP14(){const N=+document.getElementById("p14N").value,fs=+document.getElementById("p14fs").value,fc=+document.getElementById("p14fc").value;if(!(N>0&&fs>0&&fc>0&&fc<fs/2)){alert("Enter valid N, fs and fc.");return}const r=firResponse(N,fs,fc,"high","hamming");
+destroyChart("chartP14Magnitude");let ctx=document.getElementById("chartP14Magnitude").getContext("2d");charts.chartP14Magnitude=new Chart(ctx,{type:"line",data:{labels:r.f,datasets:[{label:"Magnitude Response (dB)",data:r.mag,borderWidth:2,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:"FIR High-Pass Filter – Magnitude Response"},legend:{display:true}},scales:{x:{type:"linear",title:{display:true,text:"Frequency (Hz)"}},y:{title:{display:true,text:"Magnitude (dB)"}}}}});
+destroyChart("chartP14Phase");ctx=document.getElementById("chartP14Phase").getContext("2d");charts.chartP14Phase=new Chart(ctx,{type:"line",data:{labels:r.f,datasets:[{label:"Phase Response (degrees)",data:r.ph,borderWidth:2,pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{title:{display:true,text:"FIR High-Pass Filter – Phase Response"},legend:{display:true}},scales:{x:{type:"linear",title:{display:true,text:"Frequency (Hz)"}},y:{title:{display:true,text:"Phase (degrees)"}}}}});document.getElementById("p14Result").innerHTML="N = "+N+"<br>fs = "+fs+" Hz<br>fc = "+fc+" Hz<br>Normalized Wc = "+r.wc.toFixed(4)+"<br>Window = Hamming<br>Coefficients = "+(N+1)+"<br><br><span style='color:green;font-size:18px'>✅ Magnitude and Phase plotted separately</span>";}
+</script>
+</body>
+</html>
